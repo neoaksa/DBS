@@ -27,19 +27,27 @@ public class TaskA implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int n[] = {2, 4, 8, 16, 32}; // thread number
+		int n[] = new int[]{2, 4, 8, 16, 32}; // thread number
 		for (int threadn = 0; threadn < n.length; threadn++) {
 			long startTime = System.currentTimeMillis();
 			Thread threadArr[] = new Thread[n[threadn]]; //thread array
 			Counter cnt = new Counter();
-			ExecutorService executor = Executors.newFixedThreadPool(n[threadn]);
+			// create threads
 			for (int i = 0; i < n[threadn]; i++) {
 				threadArr[i] = new Thread(new TaskA(cnt));
-				executor.execute(threadArr[i]);
 			}
-			executor.shutdown();
-			while (!executor.isTerminated()) {
-//				System.out.println("Not all threads finished");
+			//start threads
+			for (int i = 0; i < n[threadn]; i++) {
+				threadArr[i].start();
+			}
+			//join threads
+			try{
+				for (int i = 0; i < n[threadn]; i++) {
+				threadArr[i].join();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			long endTime = System.currentTimeMillis();
 			System.out.format(String.format("execute %d threads finished \n", n[threadn]));

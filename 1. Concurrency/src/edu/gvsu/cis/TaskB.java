@@ -28,7 +28,7 @@ public class TaskB implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int n[] = {2, 4, 8, 16, 32}; // thread number
+		int n[] = new int[]{2, 4, 8, 16, 32}; // thread number
 		for (int threadn = 0; threadn < n.length; threadn++) {
 			long startTime = System.currentTimeMillis();
 			Thread threadArr[] = new Thread[n[threadn]]; //thread array

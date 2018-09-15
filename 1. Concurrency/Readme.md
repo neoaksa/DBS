@@ -9,4 +9,4 @@ Yes. Since Program B is thread synchronized. It only has one thread executing in
 
 **3. Analyze the differences in elapsed time between Program A and Program B.  Is there a significant difference?  Explain why or why not.**
 
-Program B is slower than Program A, since threads in program B are synchronized, they can’t access `counter` until the thread inside exits. However, the threads in program A, can access `counter` anytime.  
+Program B is significantly slower than Program A, since threads in program B are synchronized, they can’t access `counter` until the thread inside exits. However, the threads in program A, can access `counter` anytime.  

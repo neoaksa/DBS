@@ -10,7 +10,7 @@ Synchronized:
 
 ![img](imgs/Screenshot_20180920_152446.png)
 
-Counter is equal to n\*1000000, since my hardware is 8 threads CPU, the time costing is increasing almost linearly from 2-8 threads. After 8 threads, the unite time costing for each threads is a little longer than previous.
+Counter is equal to n\*1000000, since my hardware is 8 threads CPU, the time costing is increasing almost linearly from 2-8 threads. After 8 threads, the unit time costing for each threads is a little longer than previous.
 
 ### Analysis:
 

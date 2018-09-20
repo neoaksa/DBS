@@ -17,9 +17,9 @@ public class TaskB implements Runnable {
 	public void run() {
 		for(int i=0; i<1000000; i++) {
 			cnt.safeIncrement();
-//			if(i==999999){
+			if(i==999999){
 //				System.out.println(String.format("execute thread: %s - %d",Thread.currentThread().getName(), i));
-//			}
+			}
 		}
 
 	}

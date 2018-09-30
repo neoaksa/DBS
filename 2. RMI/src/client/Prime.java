@@ -2,41 +2,47 @@ package client;
 
 
 import compute.Task;
-
 import java.io.Serializable;
 
 
 public class Prime implements Task<String>, Serializable{
 
-    private static final long serialVersionUID = 227L;
+//    private static final long serialVersionUID = 228L;
 
     private int max;
     private int min;
+
     // generate prime number between min and max
-    public Prime(int max, int min) {
+    public Prime(int min, int max) {
         this.max = max;
         this.min = min;
     }
 
     // get the prime number
     public String execute() {
-        String primeNumbers = "";
-        for (int i = this.min; i <= this.max; i++)
+        StringBuffer primeNumbers = new StringBuffer(" ");
+        int count=0,i,j;
+        for(i = this.min; i <= this.max; i++)
         {
-            int counter=0;
-            for(int num =i; num>=1; num--)
+            for( j = 2; j < i; j++)
             {
-                if(i%num==0)
+                if(i % j == 0)
                 {
-                    counter = counter + 1;
+                    count = 0;
+                    break;
+                }
+                else
+                {
+                    count = 1;
                 }
             }
-            if (counter ==2)
+            if(count == 1)
             {
-                //Appended the Prime number to the String
-                primeNumbers = primeNumbers + String.valueOf(i) + " ";
+                primeNumbers.append(Integer.toString(i));
+                primeNumbers.append(" ");
             }
         }
-        return primeNumbers;
+        return primeNumbers.toString();
+
     }
 }

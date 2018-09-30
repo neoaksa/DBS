@@ -1,0 +1,12 @@
+#start server
+java -cp /home/jie/src:/home/jie/public_html/classes/compute.jar
+     -Djava.rmi.server.codebase=http://192.168.0.14/~jie/classes/compute.jar
+     -Djava.rmi.server.hostname=192.168.0.14
+     -Djava.security.policy=server.policy
+        engine.ComputeEngine
+        
+#start client
+java -cp /home/jones/src:/home/jones/public_html/classes/compute.jar
+     -Djava.rmi.server.codebase=http://mysecondcomputer/~jones/classes/
+     -Djava.security.policy=client.policy
+        client.ComputePi mycomputer.example.com 45

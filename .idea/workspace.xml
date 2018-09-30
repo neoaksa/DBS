@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f7ef8c7-104a-45f7-9f0c-b9e8a07e5e0e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DBS.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java" beforeDir="false" afterPath="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskB.java" beforeDir="false" afterPath="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.class" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Pi.class" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Pi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Pi.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Pi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Prime.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Prime.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,14 +46,44 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1966748419">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="6" />
+          <entry key="java" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="6" />
+          <entry key="JAVA" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="844" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="844" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/2. RMI/src/client/ComputePi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+            <state relative-caret-position="600">
+              <caret line="40" column="73" selection-start-line="40" selection-start-column="73" selection-end-line="40" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,11 +91,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskB.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2. RMI/src/client/Prime.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="225">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2. RMI/src/client/Pi.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,13 +125,15 @@
       <list>
         <option value="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java" />
         <option value="$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskB.java" />
+        <option value="$PROJECT_DIR$/2. RMI/src/client/Pi.java" />
+        <option value="$PROJECT_DIR$/2. RMI/src/client/Prime.java" />
+        <option value="$PROJECT_DIR$/2. RMI/src/client/ComputePi.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="-5" />
-    <option name="width" value="960" />
-    <option name="height" value="1085" />
+    <option name="width" value="836" />
+    <option name="height" value="1014" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -93,7 +141,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -104,24 +151,46 @@
             <path>
               <item name="DBS" type="b2602c69:ProjectViewProjectNode" />
               <item name="DBS" type="462c0819:PsiDirectoryNode" />
-              <item name="1. Concurrency" type="462c0819:PsiDirectoryNode" />
+              <item name="2. RMI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DBS" type="b2602c69:ProjectViewProjectNode" />
               <item name="DBS" type="462c0819:PsiDirectoryNode" />
-              <item name="1. Concurrency" type="462c0819:PsiDirectoryNode" />
+              <item name="2. RMI" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DBS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DBS" type="462c0819:PsiDirectoryNode" />
+              <item name="2. RMI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DBS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DBS" type="462c0819:PsiDirectoryNode" />
+              <item name="2. RMI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="compute" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DBS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DBS" type="462c0819:PsiDirectoryNode" />
+              <item name="2. RMI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537471499025" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/1. Concurrency" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538282607590" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -213,8 +282,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1014" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11750306" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20930232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -255,20 +325,89 @@
     <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/Counter.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java">
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/client/Prime.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+        <state>
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#855#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/compute/Compute.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#286#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/compute/Task.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/engine/ComputeEngine.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#1109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/client/ComputePi.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#1778#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="255">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1. Concurrency/src/edu/gvsu/cis/TaskA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/client/Prime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/client/Pi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. RMI/src/client/ComputePi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="73" selection-start-line="40" selection-start-column="73" selection-end-line="40" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

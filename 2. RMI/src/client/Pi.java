@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class Pi implements Task<BigDecimal>, Serializable {
 
-    private static final long serialVersionUID = 227L;
+//    private static final long serialVersionUID = 227L;
 
     /** constants used in pi computation */
     private static final BigDecimal FOUR =

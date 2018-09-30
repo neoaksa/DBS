@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f7ef8c7-104a-45f7-9f0c-b9e8a07e5e0e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.class" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/ComputePi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Pi.class" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Pi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Pi.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Pi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. RMI/src/client/Prime.java" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/src/client/Prime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. RMI/server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/2. RMI/server.sh" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -131,7 +125,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="836" />
     <option name="height" value="1014" />
   </component>
@@ -189,7 +183,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538282607590" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538282608724" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -281,7 +275,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1014" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1014" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20930232" />

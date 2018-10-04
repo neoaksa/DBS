@@ -77,4 +77,16 @@ cd src
 java -cp /home/pi/src:/home/pi/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.11/~pi/classes/ -Djava.security.policy=client.policy client.EchoClient 192.168.0.13 [name] [port]
 ```
 
+#### Command:
+
+```batch
+please input your option:
+[friends] : list all available friends.
+[talk]{username}{message} : talk to friends.
+[broadcast]{message} : broadcast message.
+[busy] : set status as busy.
+[available] : set status as available.
+[exit] : exit program
+```
+
 

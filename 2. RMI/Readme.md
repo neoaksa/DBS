@@ -23,9 +23,9 @@ client.policy: client policy file. put into client:`/home/$username/src`, where 
 1.start server
 
 ```batch
-rmiregistry &
-
 cd src
+
+rmiregistry &
 
 java -cp /home/jie/src:/home/jie/public_html/classes/compute.jar -Djava.rmi.server.codebase=http://192.168.0.13/~jie/classes/compute.jar -Djava.rmi.server.hostname=192.168.0.13 -Djava.security.policy=server.policy engine.ComputeEngine
 ```
@@ -61,6 +61,8 @@ client.policy: client policy file. put into client:`/home/$username/src`, where 
 1. start server
 
 ```batch
+cd src 
+
 rmiregistry &
 
 java -cp /home/jie/src:/home/jie/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.13/~jie/classes/chat.jar -Djava.rmi.server.hostname=192.168.0.13 -Djava.security.policy=server.policy chatServer.chatServer

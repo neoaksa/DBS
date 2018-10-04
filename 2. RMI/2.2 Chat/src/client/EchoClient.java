@@ -101,7 +101,7 @@ public class EchoClient {
                             System.out.println("user is busy.");
                         }
                         else{
-                            stockMsg(stockServer.getHost(),stockServer.getPort(),elements.get(2));
+                            stockMsg(stockServer.getHost(),stockServer.getPort(),userName+":"+elements.get(2));
                             System.out.println("message sent out!");
                         }
                     }
@@ -120,7 +120,7 @@ public class EchoClient {
                         else{
                             for(RegistrationInfo stockServer: clients){
                                 if(stockServer.getStatus()){
-                                    stockMsg(stockServer.getHost(),stockServer.getPort(),elements.get(1));
+                                    stockMsg(stockServer.getHost(),stockServer.getPort(),userName+":"+elements.get(1));
                                 }
                             }
                             System.out.println("message sent out!");

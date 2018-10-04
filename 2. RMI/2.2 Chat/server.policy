@@ -1,0 +1,3 @@
+grant codeBase "file:/home/jie/src/" {
+    permission java.security.AllPermission;
+};

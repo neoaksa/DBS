@@ -72,11 +72,7 @@ java -cp /home/jie/src:/home/jie/public_html/classes/chat.jar -Djava.rmi.server.
 
 ```batch
 cd src
-java client.EchoServer
-
-# port is from feedback of client.EchoServer
-cd src
-java -cp /home/pi/src:/home/pi/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.11/~pi/classes/ -Djava.security.policy=client.policy client.EchoClient 192.168.0.13 [name] [port]
+java -cp /home/pi/src:/home/pi/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.11/~pi/classes/ -Djava.security.policy=client.policy client.EchoClient 192.168.0.13 [username] 
 ```
 
 #### Command:

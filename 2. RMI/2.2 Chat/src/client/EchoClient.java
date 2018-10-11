@@ -51,12 +51,12 @@ public class EchoClient {
 
                 while(true) {
                     try {
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
+//                         try {
+//                             Thread.sleep(10);
+//                         } catch (InterruptedException e) {
+//                             // TODO Auto-generated catch block
+//                             e.printStackTrace();
+//                         }
 //                         System.out.println("Open port:"+Integer.toString(port));
 //                         System.out.println("Waiting for connections");
                         clientSocket = echoServer.accept();
@@ -187,7 +187,7 @@ public class EchoClient {
                                 }
                                 else{
                                     for(RegistrationInfo stockServer: clients){
-                                        if(stockServer.getStatus()){
+                                        if(stockServer.getStatus() && stockServer.getUserName()!=this.userName){
                                             stockMsg(stockServer.getHost(),stockServer.getPort(),userName+":"+elements.get(1));
                                         }
                                     }
@@ -246,6 +246,8 @@ public class EchoClient {
         //                 line = server.readLine();
         //                 System.out.println("Received back: " + line);
         //             }
+                        if (clientSocket != null)
+                            clientSocket.close();
 
                 } catch (UnknownHostException e) {
                     // TODO Auto-generated catch block
@@ -254,7 +256,6 @@ public class EchoClient {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-        //         System.out.println("Client is exiting");
             }
         }
 }

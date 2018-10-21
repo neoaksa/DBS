@@ -23,7 +23,6 @@ public class ChatClient
 {
 
 	PresenceService nameServer;
-//    ServerSocket serviceSkt = null;
     int clientPort = 0;
     SvrThread svrThread;
     RegistrationInfo regInfo;
@@ -48,9 +47,10 @@ public class ChatClient
 
 //        // Step 1. We need to establish a server socket where we will listen for
 //        // incoming chat requests.
-//        try {
-//            this.serviceSkt = new ServerSocket(0);
-//        } catch (IOException e) {
+//        try(ZContext context = new ZContext()) {
+//            // Socket to talk to clients
+//            this.socket = context.createSocket(ZMQ.REP);
+//        } catch (Exception e) {
 //            System.out.println("Error: Couldn't allocate local socket endpoint.");
 //            System.exit(-1);
 //        }
@@ -254,11 +254,11 @@ public class ChatClient
             // User is not registered!
             retval = false;
         } else {
-            try (ZContext context = new ZContext()){
+            try (ZMQ.Context context = ZMQ.context(1)){
                 // Socket to talk to clients
                 String host = "tcp://"+ reg.getHost()+":"+ reg.getPort(); // host address
                 System.out.println(host);
-                ZMQ.Socket socket = context.createSocket(ZMQ.REQ);
+                ZMQ.Socket socket = context.socket(ZMQ.REQ);
                 String completeMsg = "Message from " + this.regInfo.getUserName() + ": " + msg + "\n";
                 socket.connect(host);
                 socket.send(completeMsg);
@@ -299,29 +299,26 @@ public class ChatClient
             //
             // wait for incoming requests.
             //
-            try (ZContext context = new ZContext()) {
+            try (ZMQ.Context context = ZMQ.context(1)) {
                 // Socket to talk to clients
-                ZMQ.Socket socket = context.createSocket(ZMQ.REP);
+                ZMQ.Socket socket = context.socket(ZMQ.REP);
                 String myHost = InetAddress.getLocalHost().getHostAddress();
                 socket.bind("tcp://"+myHost+":"+Integer.toString(ChatClient.this.clientPort));
                 System.out.println("Successfully bind to "+ "tcp://"+myHost+":"+Integer.toString(ChatClient.this.clientPort));
-                while(!done) {
-                    System.out.println("monitoring");
-                    while (!Thread.currentThread().isInterrupted()) {
-                        // Block until a message is received
-                        byte[] reply = socket.recv(0);
 
-                        // Print the message
-                        System.out.println(
-                                "Received: [" + new String(reply, ZMQ.CHARSET) + "]"
-                        );
+                while (!Thread.currentThread().isInterrupted() && !done) {
+                    // Block until a message is received
+                    byte[] reply = socket.recv(0);
 
-                        // Send a response
-                        String response = "Hello, world!";
-                        socket.send(response.getBytes(ZMQ.CHARSET), 0);
-
-                    }
+                    // Print the message
+                    System.out.println(
+                            "Received: " + new String(reply, ZMQ.CHARSET)
+                    );
+//                    // Send a response
+//                    String response = "Message send out!";
+//                    socket.send(response.getBytes(ZMQ.CHARSET), 0);
                 }
+
                 socket.close();
             } catch (Exception e){
                 System.out.println("Warning: caught Exception while running server socket.");
@@ -342,10 +339,10 @@ public class ChatClient
             //
             // Just in case svr thread is blocked on accept, we give it a nudge.
             //
-            ZContext context = new ZContext();
+            ZMQ.Context context = ZMQ.context(1);
             ZMQ.Socket socket;
             try  {
-                socket = context.createSocket(ZMQ.REP);
+                socket = context.socket(ZMQ.REP);
                 socket.close();
             } catch (Exception e) {
 

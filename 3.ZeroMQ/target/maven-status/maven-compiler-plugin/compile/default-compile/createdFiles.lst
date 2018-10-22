@@ -1,5 +1,7 @@
-edu/gvsu/cis/RegistrationInfo.class
 edu/gvsu/cis/MyPresenceServer.class
+edu/gvsu/cis/RegistrationInfo.class
 edu/gvsu/cis/PresenceService.class
+edu/gvsu/cis/ChatClient$subThread.class
 edu/gvsu/cis/ChatClient.class
 edu/gvsu/cis/ChatClient$SvrThread.class
+edu/gvsu/cis/MyPresenceServer$pubThread.class

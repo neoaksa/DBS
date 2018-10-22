@@ -14,7 +14,7 @@ import java.util.Vector;
 import java.net.*;
 import java.io.*;
 import org.zeromq.ZMQ;
-import org.zeromq.ZContext;
+
 
 /**
  * A simple chat client.
@@ -25,6 +25,7 @@ public class ChatClient
 	PresenceService nameServer;
     int clientPort = 0;
     SvrThread svrThread;
+    subThread subThread;
     RegistrationInfo regInfo;
 
     /**
@@ -90,11 +91,15 @@ public class ChatClient
             System.exit(1);
         }
 
-        // Step 5. Kick off a separate thread to listen to incoming requests on the
-        // Server socket.
+        // Step 5. start two side threads
+        // REP socket.
         this.svrThread = new SvrThread();
         Thread t = new Thread(this.svrThread);
+        // SUB socket.
+        this.subThread = new subThread(hostPortStr, "9999");
+        Thread t2 = new Thread(this.subThread);
         t.start();
+        t2.start();
     }
 
 
@@ -173,14 +178,10 @@ public class ChatClient
                                 String userName = client.getUserName();
                                 // Don't broadcast to the local client!
                                 if(!userName.equals(this.regInfo.getUserName())) {
-                                    System.out.print("Sending message to " + userName + " ... " );
-                                    if(!this.sendMsgToKnownUser(client, msg)) {
-                                        System.out.println("failed (unavailable).");
-                                    } else {
-                                        System.out.println("Done!");
-                                    }
+                                    System.out.print("Sending message to " + userName + " ... \n" );
                                 }
                              }
+                             this.nameServer.broadcast(msg);
                         } else {
                             System.out.println("No users to broadcast to.\n");
                         }
@@ -208,6 +209,7 @@ public class ChatClient
                             this.nameServer.unregister(this.regInfo.getUserName());
                         }
                         this.svrThread.stop();
+                        this.subThread.stop();
                         System.out.println("Goodbye.");
                         done = true;
                     } else {
@@ -281,8 +283,7 @@ public class ChatClient
     	}
     }
     /**
-     * Simple inner class that implements the thread that will be responsible
-     * for handling incoming chat messages.
+     * Rep thread
      */
     class SvrThread implements Runnable
     {
@@ -304,7 +305,7 @@ public class ChatClient
                 ZMQ.Socket socket = context.socket(ZMQ.REP);
                 String myHost = InetAddress.getLocalHost().getHostAddress();
                 socket.bind("tcp://"+myHost+":"+Integer.toString(ChatClient.this.clientPort));
-                System.out.println("Successfully bind to "+ "tcp://"+myHost+":"+Integer.toString(ChatClient.this.clientPort));
+                System.out.println("Successfully bind to REP:"+ "tcp://"+myHost+":"+Integer.toString(ChatClient.this.clientPort));
 
                 while (!Thread.currentThread().isInterrupted() && !done) {
                     // Block until a message is received
@@ -325,7 +326,8 @@ public class ChatClient
             }
             System.out.println("Server thread is exiting.");
         }
-        
+
+
 
         /**
          * This is how we signal the ServerSocket thread which is likely to
@@ -343,6 +345,76 @@ public class ChatClient
             ZMQ.Socket socket;
             try  {
                 socket = context.socket(ZMQ.REP);
+                socket.close();
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    // sub thread
+    class subThread implements Runnable
+    {
+        // We'll use this to flag when the thread can stop accepting new
+        // connections and exit.
+        boolean done = false;
+        String pubAddress;
+        String pubPort;
+
+        subThread(String pubAddress, String pubPort){
+            this.pubAddress = pubAddress;
+            this.pubPort = pubPort;
+        }
+        /**
+         * Thread's entry point.
+         */
+        public void run()
+        {
+            //
+            // wait for incoming requests.
+            //
+            try (ZMQ.Context context = ZMQ.context(1)) {
+                // Socket to talk to clients
+                ZMQ.Socket socket = context.socket(ZMQ.SUB);
+                socket.connect("tcp://"+this.pubAddress+":"+this.pubPort);
+
+                System.out.println("Successfully connect to PUB: tcp://"+this.pubAddress+":"+this.pubPort);
+                while (!Thread.currentThread().isInterrupted() && !done) {
+                    socket.subscribe("A".getBytes());
+                    byte[] reply = socket.recv(0);
+                    System.out.println(
+                            "Received Broadcast: " + new String(reply, ZMQ.CHARSET)
+                    );
+//                    // Send a response
+//                    String response = "Message send out!";
+//                    socket.send(response.getBytes(ZMQ.CHARSET), 0);
+                }
+
+                socket.close();
+            } catch (Exception e){
+                System.out.println("Warning: caught Exception while running server socket.");
+            }
+            System.out.println("Server thread is exiting.");
+        }
+
+
+
+        /**
+         * This is how we signal the ServerSocket thread which is likely to
+         * be happily camped out on an accept() when the chimp types exit.
+         */
+        public void stop()
+        {
+            // set done to true.
+            done = true;
+
+            //
+            // Just in case svr thread is blocked on accept, we give it a nudge.
+            //
+            ZMQ.Context context = ZMQ.context(1);
+            ZMQ.Socket socket;
+            try  {
+                socket = context.socket(ZMQ.SUB);
                 socket.close();
             } catch (Exception e) {
 

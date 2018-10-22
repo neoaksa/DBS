@@ -7,6 +7,9 @@ package edu.gvsu.cis;
  * @version 1.0
  */
 
+import org.zeromq.ZMQ;
+
+import java.net.InetAddress;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -14,14 +17,22 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
 import java.util.Set;
 import java.util.Vector;
+import java.net.UnknownHostException;
+
+import static java.lang.Thread.sleep;
 
 public class MyPresenceServer implements PresenceService {
 	
 	Hashtable<String,RegistrationInfo> regData;
+	pubThread srvpub;
+	StringBuilder msg = null;
 
 	public MyPresenceServer() {
 		super();
 		this.regData = new Hashtable<String,RegistrationInfo>();
+		this.srvpub = new pubThread();
+		Thread t = new Thread(this.srvpub);
+		t.start();
 	}
 
 	public static void main(String[] args) {
@@ -90,8 +101,43 @@ public class MyPresenceServer implements PresenceService {
 		
 	}
 	public void broadcast(String msg) throws RemoteException{
+		System.out.println("in broadcast");
+		this.msg = new StringBuilder(msg);
+	}
 
+	//publish class
+	class pubThread implements Runnable{
 
+		/**
+		 * Thread's entry point.
+		 */
+		public void run() {
+
+			try (ZMQ.Context context = ZMQ.context(1)) {
+				// Socket to talk to clients
+				ZMQ.Socket socket = context.socket(ZMQ.PUB);
+				try {
+					String myHost = InetAddress.getLocalHost().getHostAddress();
+					socket.bind("tcp://"+myHost+":9999");
+					System.out.println("Successfully bind to ZMQ pub.");
+				}catch(UnknownHostException e){
+					System.out.println("unknown host Exception!");
+				}
+				while(true){
+					try{
+						Thread.sleep(1000);
+					} catch (InterruptedException e){}
+//					System.out.println(MyPresenceServer.this.msg);
+					if(MyPresenceServer.this.msg!=null) {
+
+//						System.out.println("msg:"+MyPresenceServer.this.msg);
+						socket.sendMore ("A");
+						socket.send(MyPresenceServer.this.msg.toString());
+						MyPresenceServer.this.msg = null;
+					}
+				}
+			}
+		}
 	}
 }
 

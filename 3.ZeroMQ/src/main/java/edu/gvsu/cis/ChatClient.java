@@ -170,7 +170,7 @@ public class ChatClient
                             System.out.println("Missing the message.  Enter: broadcast {msg}");
                             continue;
                         }
-                        String msg = cmd.substring(pos+1);
+                        String msg = this.regInfo.getUserName() + ":" + cmd.substring(pos+1);
                         Vector<RegistrationInfo> clients = this.nameServer.listRegisteredUsers();
                         if(clients != null) {
                             System.out.println("\nBroadcasting to the following users:\n");
@@ -361,6 +361,7 @@ public class ChatClient
         String pubAddress;
         String pubPort;
 
+
         subThread(String pubAddress, String pubPort){
             this.pubAddress = pubAddress;
             this.pubPort = pubPort;
@@ -379,12 +380,20 @@ public class ChatClient
                 socket.connect("tcp://"+this.pubAddress+":"+this.pubPort);
 
                 System.out.println("Successfully connect to PUB: tcp://"+this.pubAddress+":"+this.pubPort);
+                socket.subscribe("A".getBytes());
                 while (!Thread.currentThread().isInterrupted() && !done) {
-                    socket.subscribe("A".getBytes());
-                    byte[] reply = socket.recv(0);
-                    System.out.println(
-                            "Received Broadcast: " + new String(reply, ZMQ.CHARSET)
-                    );
+
+                    // Read envelope with address
+                    String address = socket.recvStr ();
+                    // Read message contents
+                    String contents = socket.recvStr ();
+                    int pos = contents.indexOf(":");
+                    String sender = contents.substring(0,pos);
+                    if(!sender.equals(ChatClient.this.regInfo.getUserName()) && ChatClient.this.regInfo.getStatus()){
+                        System.out.println(
+                                "Received Broadcast from " + contents
+                        );
+                    }
 //                    // Send a response
 //                    String response = "Message send out!";
 //                    socket.send(response.getBytes(ZMQ.CHARSET), 0);

@@ -65,14 +65,14 @@ cd src
 
 rmiregistry &
 
-java -cp /home/jie/src:/home/jie/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.13/~jie/classes/chat.jar -Djava.rmi.server.hostname=192.168.0.13 -Djava.security.policy=server.policy chatServer.chatServer
+java -cp /home/jie/src:/home/jie/public_html/classes/compute.jar -Djava.rmi.server.codebase=http://127.0.0.1/~jie/classes/compute.jar -Djava.rmi.server.hostname=127.0.0.1 -Djava.security.policy=server.policy chatServer.chatServer
 ```
 
 2. start client(for each client)
 
 ```batch
 cd src
-java -cp /home/pi/src:/home/pi/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://192.168.0.11/~pi/classes/ -Djava.security.policy=client.policy client.EchoClient 192.168.0.13 [username] 
+java -cp /home/jie/src:/home/jie/public_html/classes/chat.jar -Djava.rmi.server.codebase=http://127.0.0.1/~pi/classes/ -Djava.security.policy=client.policy client.EchoClient 127.0.0.1 [username] 
 ```
 
 #### Command:

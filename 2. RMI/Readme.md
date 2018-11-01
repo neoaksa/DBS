@@ -87,4 +87,10 @@ please input your option:
 [exit] : exit program
 ```
 
+#### install apache2 and enable public_html on arch linux
+````
+sudo pacman -S apache
+mkdir ~/public_html
+
+````
 

@@ -5,3 +5,7 @@ mvn exec:java -Djava.rmi.server.useCodebaseOnly=false  -Djava.security.policy=po
 
 #### Run Client
 mvn exec:java -Djava.rmi.server.useCodebaseOnly=false  -Djava.security.policy=policy  -Dexec.mainClass=edu.gvsu.cis.ChatClient -Dexec.args=[username]
+
+#### Kill RMI if needed
+ps -ax|grep rmiregistry
+kill -9 [id]

@@ -1,7 +1,9 @@
 package edu.gvsu.cis.cis656.clock;
 
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VectorClock implements Clock {
 
@@ -11,18 +13,15 @@ public class VectorClock implements Clock {
 
     @Override
     public void update(Clock other) {
-        //update existing key
-        for(String pid : clock.keySet()){
-            int valueCur = clock.get(pid);
-            int valueOther = other.getTime(Integer.parseInt(pid));
-            // if current clock less than input, replace with greater one
-            if(valueCur<valueOther) {
-                clock.put(pid,valueOther);
+        Map<String,Integer> otherClock = other.getMap();
+        for (String otKey : otherClock.keySet()) {
+            Integer otTime = otherClock.get(otKey);
+            if(clock.containsKey(otKey)) {
+                int max = Math.max(clock.get(otKey), otTime);
+                clock.put(otKey, max);
+            } else {
+                clock.put(otKey, otTime);
             }
-        }
-        // add new key if the pid is not exist
-        for(String opid : other.getMap().keySet()){
-            this.addProcess(Integer.parseInt(opid),other.getTime(Integer.parseInt(opid)));
         }
     }
 
@@ -33,8 +32,7 @@ public class VectorClock implements Clock {
 
     @Override
     public void tick(Integer pid) {
-        if(pid!=null)
-            clock.put(Integer.toString(pid),clock.get(pid)+1);
+        clock.put(Integer.toString(pid),clock.get(pid.toString())+1);
     }
 
     @Override
@@ -51,16 +49,22 @@ public class VectorClock implements Clock {
     }
 
     public String toString() {
-        StringBuilder output = new StringBuilder();
+        // sort by key
+        Map<String, Integer> sortedClock = this.clock.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        StringBuilder output = new StringBuilder("{");
         // see the structure in VectorClockTests
-        output.append("{");
-        for(String pid : clock.keySet()){
+        for(String pid : sortedClock.keySet()){
             output.append("\""+pid+"\":");
-            output.append(clock.get(pid));
+            output.append(sortedClock.get(pid));
             output.append(",");
         }
         //cut the last comma
-        output.deleteCharAt(output.length()-1);
+        if(output.length()>1)
+            output.deleteCharAt(output.length()-1);
         output.append("}");
         return output.toString();
     }
@@ -81,7 +85,6 @@ public class VectorClock implements Clock {
 
             for (String sp : spArray) {
                 String[] s = sp.split(":");
-                newClock.put(s[0], Integer.parseInt(s[1]));
                 newClock.put(s[0].replace("\"", ""), Integer.parseInt(s[1]));
             }
 

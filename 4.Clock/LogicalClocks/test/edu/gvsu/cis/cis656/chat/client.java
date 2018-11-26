@@ -6,169 +6,135 @@ import edu.gvsu.cis.cis656.message.MessageComparator;
 import edu.gvsu.cis.cis656.message.MessageTypes;
 import edu.gvsu.cis.cis656.queue.PriorityQueue;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Scanner;
+
 
 public class client {
 
-    protected static DatagramSocket socket = null;
-    protected static int pid;
-    protected static PriorityQueue<Message> queue;
-    protected static VectorClock clock;
-    private static InetAddress localHost;
-
-    private static ReceivingThread recThread;
+    private static int myPid;
+    private static InetAddress address;
+    private static DatagramSocket socket = null;
+    private static PriorityQueue<Message> queue;
+    private static VectorClock clock;
+    private static MessageRev receiveThread;
+    private static int port;
 
     public static void main(String[] args) throws InterruptedException, UnknownHostException {
 
-        Scanner scanner = new Scanner(System.in);
+        String userName;
         queue = new PriorityQueue<>(new MessageComparator());
         clock = new VectorClock();
+        port = 8000;
+        // get username
+        System.out.print("Enter username: ");
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            userName = in.readLine();
+        }catch (IOException e){
+            e.printStackTrace();
+            return;
+        }
+        address = InetAddress.getLocalHost();
 
-
-        System.out.print("Please enter a username: ");
-        String username = scanner.nextLine();
-        localHost = InetAddress.getLocalHost();
-
+        // create socket
         try {
             socket = new DatagramSocket();
         } catch (SocketException e) {
             e.printStackTrace();
         }
 
-        boolean success = registerUser(username);
-        clock.addProcess(pid, 0);
-
-        if(!success) {
-            return;
+        // register user
+        Message message = new Message(0, userName, 0, null, userName);
+        Message.sendMessage(message, socket, address, port);
+        Message ackMessage = Message.receiveMessage(socket);
+        if (ackMessage.type == 1) {
+            myPid = ackMessage.pid;
+            clock.addProcess(myPid, 0);
+            System.out.println("your pid#: " + myPid + "and clock#:" + clock.toString());
+        }
+        else if (ackMessage.type == 3) {
+            System.out.println("user name has been registered.");
+            System.exit(0);
         }
 
-        recThread = new ReceivingThread(socket, queue, clock);
-        Thread thread  = new Thread(recThread);
-        thread.start();
+        //receve message thread
+        receiveThread = new MessageRev();
+        Thread t = new Thread(receiveThread);
+        t.start();
 
-        boolean running = true;
-        int sendNumber = 1;
-        while (running) {
-            System.out.print("Type 'exit' or a message: ");
-            String line = scanner.nextLine();
+        boolean signal = true;
+        int line = 1;
+        while (signal) {
+            System.out.print("wait for entering message or type 'exit':");
+            String input;
+            in = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                input = in.readLine();
+            }catch (IOException e){
+                e.printStackTrace();
+                return;
+            }
 
-            if(line.equals("exit")) {
-                recThread.stop();
-                Thread.sleep(500);
-                running = false;
+            if(input.equals("exit")) {
+                receiveThread.stop();
+                Thread.sleep(1200);
+                signal = false;
             } else {
-                clock.tick(pid); // Update clock
-                Message message = new Message(MessageTypes.CHAT_MSG, username, pid, clock, " (" + sendNumber +  "): " + line);
-                Message.sendMessage( message, socket, localHost, 8000);
-                sendNumber++;
+                clock.tick(myPid); // Update clock
+                Message outMessage = new Message(MessageTypes.CHAT_MSG, userName, myPid, clock, " (" + line +  "): " + input);
+                Message.sendMessage( outMessage, socket, address, port);
+                line++;
             }
         }
 
         System.exit(0);
     }
 
-    private static boolean registerUser(String username)
-    {
-        try {
 
-            // Send registration
-            Message message = new Message(MessageTypes.REGISTER, username, 0, null, "reg");
-            Message.sendMessage(message, socket, localHost, 8000);
-
-            // Receive something back
-            byte[] buf = new byte[256];
-            DatagramPacket packet = new DatagramPacket(buf, buf.length);
-            socket.receive(packet);
-            String received = new String(packet.getData(), 0, packet.getLength());
-            Message returned = Message.parseMessage(received);
-
-            if(returned.type == MessageTypes.ACK) {
-                System.out.println(returned.message);
-                pid = returned.pid;
-            }
-
-            return returned.type == MessageTypes.ACK;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static class ReceivingThread implements Runnable {
-
-        private DatagramSocket socket;
-        PriorityQueue<Message> queue;
-        VectorClock localClock;
-        int myPid;
-
-        public ReceivingThread(DatagramSocket socket, PriorityQueue<Message> queue, VectorClock localClock) {
-            this.socket = socket;
-            this.queue = queue;
-            this.localClock = localClock;
-        }
+    public static class MessageRev implements Runnable {
 
         boolean done = false;
 
         public void run() {
-            byte[] buf = new byte[256];
-            DatagramPacket packet = new DatagramPacket(buf, buf.length);
-
-            while (!done) {
-
-                try {
-                    socket.receive(packet);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (done)
-                    socket.close();
-
-                String received = new String(packet.getData(), 0, packet.getLength());
-                Message message = Message.parseMessage(received);
-
-                if (message.type == MessageTypes.ERROR) {
-                    System.out.println(message.message);
-                } else {
-                    queue.add(message);
-                    Message topMsg = queue.peek();
-                    while (topMsg != null) {
-                        if (canPrint(topMsg)) {
-                            System.out.println("\n" +topMsg.sender + topMsg.message);
-                            System.out.print("Type 'exit' or a message: ");
-
-                            // Update local clock
-                            localClock.update(topMsg.ts);
-
-                            // Remove from queue
-                            queue.remove(topMsg);
-                            topMsg = queue.peek();
-                        } else {
-                            topMsg = null;
+            MessageComparator mc =new MessageComparator();
+            PriorityQueue<Message> pq = new PriorityQueue<Message>(mc);
+            while(true) {
+                Message msg = Message.receiveMessage(socket);
+                pq.add(msg);
+                Message topMsg = pq.peek();
+                while (topMsg != null) {
+                    int myClockTopMsgTime = 0;
+                    if(clock.getMap().containsKey(Integer.toString(topMsg.pid))) { myClockTopMsgTime = clock.getTime(topMsg.pid); }
+                    boolean hasSeenAll = true;
+                    for (String key: topMsg.ts.getMap().keySet()) {
+                        if (Integer.parseInt(key) != myPid && Integer.parseInt(key) != topMsg.pid) {
+                            if (clock.getMap().containsKey(key)) {
+                                if (topMsg.ts.getTime(Integer.parseInt(key)) > clock.getTime(Integer.parseInt(key)) ) { hasSeenAll = false;}
+                            }else {
+                                hasSeenAll = false;
+                            }
                         }
+                    }
+                    if (topMsg.ts.getTime(topMsg.pid) == myClockTopMsgTime + 1 && hasSeenAll) {
+                        System.out.println(topMsg.sender+": "+topMsg.message);
+                        pq.poll();
+                        clock.update(topMsg.ts);
+                        topMsg = pq.peek();
+                    }else {
+                        topMsg = null;
                     }
                 }
             }
 
-            socket.close();
-
-            System.out.println("Server thread is exiting.");
+            //System.out.println("Server thread is exiting.");
         }
 
         public void stop() {
             done = true;
         }
 
-        private boolean canPrint(Message message) {
-
-            // Is message one ahead of my clock
-            boolean isPlusOne = localClock.getTime(message.pid) + 1 == message.ts.getTime(message.pid);
-            boolean hasSeenAllMessage = localClock.happenedBefore(message.ts);
-
-            return isPlusOne && hasSeenAllMessage;
-        }
     }
 }

@@ -1,6 +1,6 @@
 Jie Tao-G01723372
 ### Server
-run "java –jar server.jar"
+run "java -jar server.jar"
 
 ### Client
 client.java

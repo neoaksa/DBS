@@ -53,7 +53,7 @@ public class client {
         if (ackMessage.type == 1) {
             myPid = ackMessage.pid;
             clock.addProcess(myPid, 0);
-            System.out.println("your pid#: " + myPid + "and clock#:" + clock.toString());
+            System.out.println("your pid#: " + myPid + " and clock#:" + clock.toString());
         }
         else if (ackMessage.type == 3) {
             System.out.println("user name has been registered.");
@@ -100,31 +100,34 @@ public class client {
 
         public void run() {
             MessageComparator mc =new MessageComparator();
-            PriorityQueue<Message> pq = new PriorityQueue<Message>(mc);
+            PriorityQueue<Message> queue = new PriorityQueue<Message>(mc);
+            Message msg = null;
             while(true) {
-                Message msg = Message.receiveMessage(socket);
-                pq.add(msg);
-                Message topMsg = pq.peek();
-                while (topMsg != null) {
-                    int myClockTopMsgTime = 0;
-                    if(clock.getMap().containsKey(Integer.toString(topMsg.pid))) { myClockTopMsgTime = clock.getTime(topMsg.pid); }
-                    boolean hasSeenAll = true;
-                    for (String key: topMsg.ts.getMap().keySet()) {
-                        if (Integer.parseInt(key) != myPid && Integer.parseInt(key) != topMsg.pid) {
+                // receive the message
+                msg = Message.receiveMessage(socket);
+                queue.add(msg);
+                //pick and remove the first element
+                Message firtMsg = queue.peek();
+                while (firtMsg!=null) {
+                    int firtMsgTime = 0;
+                    if(clock.getMap().containsKey(Integer.toString(firtMsg.pid))) { firtMsgTime = clock.getTime(firtMsg.pid); }
+                    boolean loopE = true;
+                    for (String key: firtMsg.ts.getMap().keySet()) {
+                        if (Integer.parseInt(key) != myPid && Integer.parseInt(key) != firtMsg.pid) {
                             if (clock.getMap().containsKey(key)) {
-                                if (topMsg.ts.getTime(Integer.parseInt(key)) > clock.getTime(Integer.parseInt(key)) ) { hasSeenAll = false;}
+                                if (firtMsg.ts.getTime(Integer.parseInt(key)) > clock.getTime(Integer.parseInt(key)) ) { loopE = false;}
                             }else {
-                                hasSeenAll = false;
+                                loopE = false;
                             }
                         }
                     }
-                    if (topMsg.ts.getTime(topMsg.pid) == myClockTopMsgTime + 1 && hasSeenAll) {
-                        System.out.println(topMsg.sender+": "+topMsg.message);
-                        pq.poll();
-                        clock.update(topMsg.ts);
-                        topMsg = pq.peek();
+                    if (firtMsg.ts.getTime(firtMsg.pid) == firtMsgTime + 1 && loopE) {
+                        System.out.println(firtMsg.sender+": "+firtMsg.message);
+                        queue.poll();
+                        clock.update(firtMsg.ts);
+                        firtMsg = queue.peek();
                     }else {
-                        topMsg = null;
+                        firtMsg = null;
                     }
                 }
             }

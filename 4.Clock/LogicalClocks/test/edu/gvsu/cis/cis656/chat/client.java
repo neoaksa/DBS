@@ -29,11 +29,11 @@ public class client {
         clock = new VectorClock();
         port = 8000;
         // get username
-        System.out.print("Enter username: ");
+        System.out.print("Plese enter username: ");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         try {
             userName = in.readLine();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return;
         }
@@ -50,13 +50,20 @@ public class client {
         Message message = new Message(0, userName, 0, null, userName);
         Message.sendMessage(message, socket, address, port);
         Message ackMessage = Message.receiveMessage(socket);
+        //register
         if (ackMessage.type == 1) {
             myPid = ackMessage.pid;
             clock.addProcess(myPid, 0);
+<<<<<<< HEAD
             System.out.println("registered your pid#: " + myPid);
         }
         else if (ackMessage.type == 3) {
             System.out.println("user name has been registered.");
+=======
+            System.out.println("registered your pid#: " + myPid + " and clock#:" + clock.toString());
+        } else if (ackMessage.type == 3) {
+            System.out.println("Sorry. This name has been registered.");
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
             System.exit(0);
         }
 
@@ -66,26 +73,25 @@ public class client {
         t.start();
 
         boolean signal = true;
-        int line = 1;
+        int line = 1; // record the line of sending messages
         while (signal) {
             System.out.print("wait for entering message or type 'exit':");
             String input;
             in = new BufferedReader(new InputStreamReader(System.in));
             try {
                 input = in.readLine();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
 
-            if(input.equals("exit")) {
+            if (input.equals("exit")) {
                 receiveThread.stop();
-                Thread.sleep(1200);
                 signal = false;
             } else {
                 clock.tick(myPid); // Update clock
-                Message outMessage = new Message(MessageTypes.CHAT_MSG, userName, myPid, clock, " (" + line +  "): " + input);
-                Message.sendMessage( outMessage, socket, address, port);
+                Message outMessage = new Message(MessageTypes.CHAT_MSG, userName, myPid, clock, " (" + line + "): " + input);
+                Message.sendMessage(outMessage, socket, address, port);
                 line++;
             }
         }
@@ -93,51 +99,47 @@ public class client {
         System.exit(0);
     }
 
-
+    // receive message
     public static class MessageRev implements Runnable {
-
         boolean done = false;
-
         public void run() {
-            MessageComparator mc =new MessageComparator();
+            MessageComparator mc = new MessageComparator();
             PriorityQueue<Message> queue = new PriorityQueue<Message>(mc);
             Message msg = null;
-            while(true) {
+            Message firtMsg = null;
+            int firtMsgTime = 0;
+            while (true) {
                 // receive the message
                 msg = Message.receiveMessage(socket);
                 queue.add(msg);
                 //pick and remove the first element
-                Message firtMsg = queue.peek();
-                while (firtMsg!=null) {
-                    int firtMsgTime = 0;
-                    if(clock.getMap().containsKey(Integer.toString(firtMsg.pid))) { firtMsgTime = clock.getTime(firtMsg.pid); }
+                firtMsg = queue.peek();
+                while (firtMsg != null) {
+                    if (clock.getMap().containsKey(Integer.toString(firtMsg.pid))) {
+                        firtMsgTime = clock.getTime(firtMsg.pid);
+                    }
                     boolean loopE = true;
-                    for (String key: firtMsg.ts.getMap().keySet()) {
+                    for (String key : firtMsg.ts.getMap().keySet()) {
                         if (Integer.parseInt(key) != myPid && Integer.parseInt(key) != firtMsg.pid) {
-                            if (clock.getMap().containsKey(key)) {
-                                if (firtMsg.ts.getTime(Integer.parseInt(key)) > clock.getTime(Integer.parseInt(key)) ) { loopE = false;}
-                            }else {
+                            if (!clock.getMap().containsKey(key) || firtMsg.ts.getTime(Integer.parseInt(key)) > clock.getTime(Integer.parseInt(key))) {
                                 loopE = false;
                             }
                         }
-                    }
-                    if (firtMsg.ts.getTime(firtMsg.pid) == firtMsgTime + 1 && loopE) {
-                        System.out.println(firtMsg.sender+": "+firtMsg.message);
-                        queue.poll();
-                        clock.update(firtMsg.ts);
-                        firtMsg = queue.peek();
-                    }else {
-                        firtMsg = null;
+                        if (firtMsg.ts.getTime(firtMsg.pid) == (firtMsgTime + 1) && loopE) {
+                            System.out.println(firtMsg.sender + ": " + firtMsg.message);
+                            queue.poll();
+                            clock.update(firtMsg.ts);
+                            //get next one
+                            firtMsg = queue.peek();
+                        } else {
+                            firtMsg = null;
+                        }
                     }
                 }
             }
-
-            //System.out.println("Server thread is exiting.");
         }
-
         public void stop() {
             done = true;
         }
-
     }
 }

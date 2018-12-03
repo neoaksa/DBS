@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="3a4df607-90de-44cd-a50f-0fbf92bbbbf7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../5.RESTful/gae-restlet-client-example/.idea/compiler.xml" afterDir="false" />
@@ -42,6 +43,9 @@
       <change beforePath="$PROJECT_DIR$/out/test/LogicalClocks/edu/gvsu/cis/cis656/chat/client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/LogicalClocks/edu/gvsu/cis/cis656/chat/client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/edu/gvsu/cis/cis656/chat/client.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/edu/gvsu/cis/cis656/chat/client.java" afterDir="false" />
     </list>
+=======
+    <list default="true" id="3a4df607-90de-44cd-a50f-0fbf92bbbbf7" name="Default Changelist" comment="" />
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,8 +57,12 @@
     <session id="275729280">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
           <entry key="project.closed" value="7" />
           <entry key="project.open.time.1" value="1" />
+=======
+          <entry key="project.closed" value="5" />
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="2" />
@@ -89,6 +97,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/edu/gvsu/cis/cis656/chat/client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-99">
+              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/gvsu/cis/cis656/clock/VectorClock.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -320,7 +343,11 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.40162036" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28139013" />
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39910313" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -435,8 +462,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gvsu/cis/cis656/clock/VectorClock.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1606">
           <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="46" />
+=======
+        <state relative-caret-position="-99">
+          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+>>>>>>> 60e8389b2dc5f9270f89812ff6a049e218450754
           <folding>
             <element signature="e#2889#2890#0" expanded="true" />
             <element signature="e#2942#2943#0" expanded="true" />

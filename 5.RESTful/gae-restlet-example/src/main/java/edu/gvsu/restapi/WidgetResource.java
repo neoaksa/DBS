@@ -28,16 +28,16 @@ import com.googlecode.objectify.Key;
  * @author Jonathan Engelsma (http://themobilemontage.com)
  *
  */
-public class WidgetResource extends ServerResource {
+public class UserResource extends ServerResource {
 
-	private Widget widget = null;
+	private RegistrationInfo widget = null;
 
 	@Override
 	public void doInit() {
 
 		// URL requests routed to this resource have the widget id on them.
 		String widgetid = null;
-		widgetid = (String) getRequest().getAttributes().get("id");
+		widgetid = (String) getRequest().getAttributes().get("userName");
 
 		// lookup the widget in google's persistance layer.
     Key<Widget> theKey = Key.create(Widget.class, Long.valueOf(widgetid));
@@ -65,12 +65,7 @@ public class WidgetResource extends ServerResource {
 			ErrorMessage em = new ErrorMessage();
 			return representError(variant, em);
 		} else {
-			if (variant.getMediaType().equals(MediaType.APPLICATION_JSON)) {
-				result = new JsonRepresentation(this.widget.toJSON());
-			} else {
-				result = new StringRepresentation(this.widget.toHtml(false));
-				result.setMediaType(MediaType.TEXT_HTML);
-			}
+            result = new JsonRepresentation(this.widget.toJSON());
 		}
 		return result;
 	}
@@ -97,7 +92,10 @@ public class WidgetResource extends ServerResource {
 			if (entity.getMediaType().equals(MediaType.APPLICATION_WWW_FORM,
 					true)) {
 				Form form = new Form(entity);
-				this.widget.setName(form.getFirstValue("name"));
+				this.widget.setUserName(form.getFirstValue("userName"));
+                this.widget.setUserName(form.getFirstValue("host"));
+                this.widget.setUserName(form.getFirstValue("port"));
+                this.widget.setUserName(form.getFirstValue("status"));
 
         // persist object
         ObjectifyService.ofy()

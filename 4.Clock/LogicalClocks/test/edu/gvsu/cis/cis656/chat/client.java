@@ -53,7 +53,7 @@ public class client {
         if (ackMessage.type == 1) {
             myPid = ackMessage.pid;
             clock.addProcess(myPid, 0);
-            System.out.println("registered your pid#: " + myPid + " and clock#:" + clock.toString());
+            System.out.println("registered your pid#: " + myPid);
         }
         else if (ackMessage.type == 3) {
             System.out.println("user name has been registered.");

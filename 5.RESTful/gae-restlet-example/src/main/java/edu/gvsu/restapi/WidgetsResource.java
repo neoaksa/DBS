@@ -29,7 +29,7 @@ import com.googlecode.objectify.ObjectifyService;
  */
 public class WidgetsResource extends ServerResource {
 
-	private List<Widget> widgets = null;
+	private List<RegistrationInfo> widgets = null;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -58,43 +58,21 @@ public class WidgetsResource extends ServerResource {
 	 */
 	@Get
 	public Representation get(Variant variant) throws ResourceException {
-		Representation result = null;
-		if (null == this.widgets) {
-			ErrorMessage em = new ErrorMessage();
-			return representError(variant, em);
-		} else {
-
-			if (variant.getMediaType().equals(MediaType.APPLICATION_JSON)) {
-
-				JSONArray widgetArray = new JSONArray();
-				for(Object o : this.widgets) {
-					Widget w = (Widget)o;
-					widgetArray.put(w.toJSON());
-				}
-
-				result = new JsonRepresentation(widgetArray);
-
-			} else {
-
-				// create a plain text representation of our list of widgets
-				StringBuffer buf = new StringBuffer("<html><head><title>Widget Resources</title><head><body><h1>Widget Resources</h1>");
-				buf.append("<form name=\"input\" action=\"/widgets\" method=\"POST\">");
-				buf.append("Widget name: ");
-				buf.append("<input type=\"text\" name=\"name\" />");
-				buf.append("<input type=\"submit\" value=\"Create\" />");
-				buf.append("</form>");
-				buf.append("<br/><h2> There are " + this.widgets.size() + " total.</h2>");
-				for(Object o : this.widgets) {
-					Widget w = (Widget)o;
-					buf.append(w.toHtml(true));
-				}
-				buf.append("</body></html>");
-				result = new StringRepresentation(buf.toString());
-				result.setMediaType(MediaType.TEXT_HTML);
+        Representation result = null;
+        if (null == this.widgets) {
+            ErrorMessage em = new ErrorMessage();
+            return representError(variant, em);
+        } else {
+            JSONArray widgetArray = new JSONArray();
+            for (Object o : this.widgets) {
+				Widget w = (Widget) o;
+				widgetArray.put(w.toJSON());
 			}
-		}
-		return result;
-	}
+                result = new JsonRepresentation(widgetArray);
+
+                return result;
+        }
+    }
 
 	/**
 	 * Handle a POST Http request. Create a new widget
@@ -118,15 +96,17 @@ public class WidgetsResource extends ServerResource {
 				// Use the incoming data in the POST request to create/store a new widget resource.
 				Form form = new Form(entity);
 				Widget w = new Widget();
-				w.setName(form.getFirstValue("name"));
+                w.setUserName(form.getFirstValue("userName"));
+                w.setUserName(form.getFirstValue("host"));
+                w.setUserName(form.getFirstValue("port"));
+                w.setUserName(form.getFirstValue("status"));
 
         // persist updated object
         ObjectifyService.ofy().save().entity(w).now();
 
 				getResponse().setStatus(Status.SUCCESS_OK);
-				rep = new StringRepresentation(w.toHtml(false));
-				rep.setMediaType(MediaType.TEXT_HTML);
-				getResponse().setEntity(rep);
+                rep = new JsonRepresentation(this.widget.toJSON());
+                getResponse().setEntity(rep);
 
 			} else {
 				getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);

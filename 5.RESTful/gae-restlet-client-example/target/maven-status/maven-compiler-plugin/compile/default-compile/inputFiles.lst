@@ -1,2 +1,4 @@
 /home/jie/git/DBS/5.RESTful/gae-restlet-client-example/src/main/java/edu/gvsu/restapi/client/App.java
 /home/jie/git/DBS/5.RESTful/gae-restlet-client-example/src/main/java/edu/gvsu/restapi/client/SampleRESTClient.java
+/home/jie/git/DBS/5.RESTful/gae-restlet-client-example/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java
+/home/jie/git/DBS/5.RESTful/gae-restlet-client-example/src/main/java/edu/gvsu/restapi/client/ChatClient.java

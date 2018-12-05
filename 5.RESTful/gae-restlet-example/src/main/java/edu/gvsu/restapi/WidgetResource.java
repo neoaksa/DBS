@@ -28,7 +28,7 @@ import com.googlecode.objectify.Key;
  * @author Jonathan Engelsma (http://themobilemontage.com)
  *
  */
-public class UserResource extends ServerResource {
+public class WidgetResource extends ServerResource {
 
 	private RegistrationInfo widget = null;
 
@@ -37,10 +37,10 @@ public class UserResource extends ServerResource {
 
 		// URL requests routed to this resource have the widget id on them.
 		String widgetid = null;
-		widgetid = (String) getRequest().getAttributes().get("userName");
+		widgetid = (String) getRequest().getAttributes().get("id");
 
 		// lookup the widget in google's persistance layer.
-    Key<Widget> theKey = Key.create(Widget.class, Long.valueOf(widgetid));
+    Key<RegistrationInfo> theKey = Key.create(RegistrationInfo.class, Long.valueOf(widgetid));
     this.widget = ObjectifyService.ofy()
         .load()
         .key(theKey)
@@ -65,7 +65,13 @@ public class UserResource extends ServerResource {
 			ErrorMessage em = new ErrorMessage();
 			return representError(variant, em);
 		} else {
-            result = new JsonRepresentation(this.widget.toJSON());
+			if (variant.getMediaType().equals(MediaType.APPLICATION_JSON)) {
+				result = new JsonRepresentation(this.widget.toJSON());
+			} else {
+				result = new StringRepresentation(this.widget.toHtml(false));
+				result.setMediaType(MediaType.TEXT_HTML);
+			}
+
 		}
 		return result;
 	}
@@ -92,10 +98,10 @@ public class UserResource extends ServerResource {
 			if (entity.getMediaType().equals(MediaType.APPLICATION_WWW_FORM,
 					true)) {
 				Form form = new Form(entity);
-				this.widget.setUserName(form.getFirstValue("userName"));
-                this.widget.setUserName(form.getFirstValue("host"));
-                this.widget.setUserName(form.getFirstValue("port"));
-                this.widget.setUserName(form.getFirstValue("status"));
+				this.widget.setUserName(form.getFirstValue("name"));
+                this.widget.setHost(form.getFirstValue("host"));
+                this.widget.setPort(Integer.parseInt(form.getFirstValue("port")));
+                this.widget.setStatus(Boolean.parseBoolean(form.getFirstValue("status")));
 
         // persist object
         ObjectifyService.ofy()

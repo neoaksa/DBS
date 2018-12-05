@@ -15,7 +15,7 @@ import java.io.*;
  */
 public class RegistrationInfo implements Serializable
 {
-	private static final long serialVersionUID = -1692519871343236571L;
+//	private static final long serialVersionUID = -1692519871343236571L;
 	private String userName;
     private String host;
     private boolean status;
@@ -28,12 +28,18 @@ public class RegistrationInfo implements Serializable
      * @param p The port # their client is listening for connections on.
      * @param s The status, true if the client is available, false otherwise.
      */
+
+
     public RegistrationInfo(String uname, String h, int p, boolean s)
     {
         this.userName = uname;
         this.host = h;
         this.port = p;
         this.status = s;
+    }
+
+    public RegistrationInfo() {
+
     }
 
     /**

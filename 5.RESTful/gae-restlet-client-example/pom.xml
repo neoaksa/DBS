@@ -53,7 +53,7 @@
       <configuration>
         <archive>
           <manifest>
-            <mainClass>edu.gvsu.restapi.client.SampleRESTClient</mainClass>
+            <mainClass>edu.gvsu.restapi.client.ChatClient</mainClass>
           </manifest>
         </archive>
         <descriptorRefs>

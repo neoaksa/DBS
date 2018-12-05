@@ -49,7 +49,7 @@ public class WebServiceApplication extends Application {
 		// Have the router, route resource requests to the appropriate resource class based on the URL pattern.
 		Router router = new Router(getContext());
 		router.attach("/widgets", WidgetsResource.class);
-		router.attach("/widgets/{id}", WidgetResource.class);
+		router.attach("/widgets/{userName}", WidgetResource.class);
 
 		// This page is going to show up if somebody access the default page of the web server.
 		Restlet mainpage = new Restlet() {

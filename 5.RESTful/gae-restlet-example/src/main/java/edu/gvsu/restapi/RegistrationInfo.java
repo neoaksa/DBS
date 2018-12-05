@@ -9,14 +9,18 @@ package edu.gvsu.restapi;
  */
 import java.io.*;
 import org.json.JSONObject;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import org.json.JSONObject;
 /**
  * This class represents the information that the chat client registers
  * with the presence server.
  */
+
+@Entity
 public class RegistrationInfo implements Serializable
 {
-	private static final long serialVersionUID = -1692519871343236571L;
-	private String userName;
+    @Id private String userName;
     private String host;
     private boolean status;
     private int port;
@@ -28,13 +32,14 @@ public class RegistrationInfo implements Serializable
      * @param p The port # their client is listening for connections on.
      * @param s The status, true if the client is available, false otherwise.
      */
-    public RegistrationInfo(String uname, String h, int p, boolean s)
-    {
-        this.userName = uname;
-        this.host = h;
-        this.port = p;
-        this.status = s;
-    }
+//    public RegistrationInfo(String uname, String h, int p, boolean s)
+//    {
+//        this.userName = uname;
+//        this.host = h;
+//        this.port = p;
+//        this.status = s;
+//    }
+
 
     //return a jason object
     public JSONObject toJSON() {
@@ -48,6 +53,42 @@ public class RegistrationInfo implements Serializable
         }catch(Exception e){
             return null;
         }
+    }
+    /**
+     * Convert this object into an HTML representation.
+     * @param fragment if true, generate an html fragment, otherwise a complete document.
+     * @return an HTML representation.
+     */
+    public String toHtml(boolean fragment)
+    {
+        String retval = "";
+        if(fragment) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("<b>UserName:</b> ");
+            sb.append(this.userName);
+            sb.append("<b> Host: </b>");
+            sb.append(host);
+            sb.append("<b> Port: </b>");
+            sb.append(port);
+            sb.append("<b> Status: </b>");
+            sb.append(status);
+            sb.append(" <a href=\"/users/" + this.userName + "\">View</a>");
+            sb.append("<br/>");
+            retval = sb.toString();
+        } else {
+            StringBuffer sb = new StringBuffer("<html><head><title>Users</title></head><body><h1>User</h1>");
+            sb.append("<b>UserName:</b> ");
+            sb.append(this.userName + "<br/>");
+            sb.append("<b>Host:</b> ");
+            sb.append(this.host + "<br/>");
+            sb.append("<b>Port:</b> ");
+            sb.append(this.port + "<br/>");
+            sb.append("<b> Status: </b>");
+            sb.append(status + "<br/>");
+            sb.append("<br/><br/>Return to <a href=\"/users\">All Users<a>.</body></html>");
+            retval = sb.toString();
+        }
+        return retval;
     }
 
     /**

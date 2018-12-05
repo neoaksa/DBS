@@ -1,6 +1,6 @@
 edu/gvsu/restapi/OfyHelper.class
+edu/gvsu/restapi/RegistrationInfo.class
 edu/gvsu/restapi/WidgetsResource.class
-edu/gvsu/restapi/Widget.class
 edu/gvsu/restapi/WebServiceApplication.class
 edu/gvsu/restapi/ErrorMessage.class
 edu/gvsu/restapi/WebServiceApplication$1.class

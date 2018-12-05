@@ -1,2 +1,5 @@
 edu/gvsu/restapi/client/App.class
+edu/gvsu/restapi/client/ChatClient$SvrThread.class
+edu/gvsu/restapi/client/RegistrationInfo.class
 edu/gvsu/restapi/client/SampleRESTClient.class
+edu/gvsu/restapi/client/ChatClient.class

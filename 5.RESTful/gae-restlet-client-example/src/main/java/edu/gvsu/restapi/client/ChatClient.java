@@ -66,13 +66,13 @@ public class ChatClient
         if(hostPortStr == null) {
             hostPortStr = myHost;
         }
-        System.out.println("User name is " + uname);
-
-        System.out.println("Trying to connect to name server at " + hostPortStr);
+//        System.out.println("User name is " + uname);
+//
+//        System.out.println("Trying to connect to name server at " + hostPortStr);
 
         // Step 3. Create the registration info bundle.
         // check if userName has been take
-        widgetsResourceURL = APPLICATION_URI + "/widgets/5066549580791808";
+        widgetsResourceURL = APPLICATION_URI + "/widgets/"+ uname;//?????
         request = new Request(Method.GET,widgetsResourceURL);
 
         // We need to ask specifically for JSON
@@ -83,7 +83,7 @@ public class ChatClient
         resp = new Client(Protocol.HTTP).handle(request);
 
         // Let's see what we got!
-        if(resp.getStatus().equals(Status.SUCCESS_OK)) {
+        if(!resp.getStatus().equals(Status.SUCCESS_OK)) {
 
             this.regInfo = new RegistrationInfo(uname, myHost, this.serviceSkt.getLocalPort(), true);
 
@@ -92,7 +92,7 @@ public class ChatClient
             Form form = new Form();
             form.add("userName", uname);
             form.add("port", Integer.toString(this.serviceSkt.getLocalPort()));
-            form.add("status", "1");
+//            form.add("status", String.valueOf(true)); //set true as default
             form.add("host", myHost);
 
             // construct request to create a new widget resource
@@ -107,7 +107,7 @@ public class ChatClient
             resp = new Client(Protocol.HTTP).handle(request);
 
             // now, let's check what we got in response.
-            System.out.println(resp.getStatus());
+//            System.out.println(resp.getStatus());
             Representation responseData = resp.getEntity();
             try {
                 System.out.println(responseData.getText());
@@ -196,11 +196,11 @@ public class ChatClient
 
                             try {
                                 String jsonString = responseData.getText().toString();
-                                JSONObject jObj = new JSONObject(jsonString);
-                                JSONArray jsonArray = jObj.getJSONArray(""); //??
+                                JSONArray jsonArray = new JSONArray(jsonString);
                                 System.out.println("\nThe following users are logged on:\n");
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    String userName = jObj.getString("userName");
+                                    JSONObject jObj = jsonArray.getJSONObject(i);
+                                    String userName = jObj.getString("name");
 //                                    String host = jObj.getString("host");
 //                                    int port = jObj.getInt("port");
                                     boolean status = jObj.getBoolean("status");
@@ -239,10 +239,10 @@ public class ChatClient
 
                             try {
                                 String jsonString = responseData.getText().toString();
-                                JSONObject jObj = new JSONObject(jsonString);
-                                JSONArray jsonArray = jObj.getJSONArray(""); //??
+                                JSONArray jsonArray = new JSONArray(jsonString);
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    String userName = jObj.getString("userName");
+                                    JSONObject jObj = jsonArray.getJSONObject(i);
+                                    String userName = jObj.getString("name");
                                     String host = jObj.getString("host");
                                     int port = jObj.getInt("port");
                                     boolean status = jObj.getBoolean("status");
@@ -519,19 +519,28 @@ public class ChatClient
      */
     public static void main(String[] args)
     {
-        if(args.length == 0) {
-            System.out.println("Usage: \n\tjava ChatClient userName [host[:port]]\n");
-            System.out.println("\nwhere userName is your username, and host/port is the name service.");
-            System.exit(0);
+        System.out.print("Plese enter username: ");
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String userName;
+        try {
+            userName = in.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
         }
+//        if(args.length == 0) {
+//            System.out.println("Usage: \n\tjava ChatClient userName [host[:port]]\n");
+//            System.out.println("\nwhere userName is your username, and host/port is the name service.");
+//            System.exit(0);
+//        }
 
         // Create a client object.
         ChatClient myClient;
-        if(args.length > 1) {
-            myClient = new ChatClient(args[0], args[1]);
-        } else {
-            myClient = new ChatClient(args[0],null);
-        }
+//        if(args.length > 1) {
+//            myClient = new ChatClient(userName, args[1]);
+//        } else {
+            myClient = new ChatClient(userName,null);
+//        }
 
         // Now we will process chat commands.
         myClient.runCmdShell();

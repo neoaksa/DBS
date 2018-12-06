@@ -376,7 +376,7 @@ public class ChatClient
                         String host = jObj.getString("host");
                         int port = jObj.getInt("port");
                         boolean status = jObj.getBoolean("status");
-                        System.out.print(msg);
+//                        System.out.print(msg);
                         RegistrationInfo reg = new RegistrationInfo(userName,host,port,status);
                         retval = this.sendMsgToKnownUser(reg, msg);
                     } catch (IOException e) {

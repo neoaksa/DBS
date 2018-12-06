@@ -40,16 +40,16 @@ public class WebServiceApplication extends Application {
 		super();
 	}
 
-  /**
-   * Creates a root Restlet that will receive all incoming calls.
-   */
-  @Override
-  public Restlet createInboundRoot() {
+	/**
+	 * Creates a root Restlet that will receive all incoming calls.
+	 */
+	@Override
+	public Restlet createInboundRoot() {
 
 		// Have the router, route resource requests to the appropriate resource class based on the URL pattern.
 		Router router = new Router(getContext());
-		router.attach("/widgets", WidgetsResource.class);
-		router.attach("/widgets/{userName}", WidgetResource.class);
+		router.attach("/users", UsersResource.class);
+		router.attach("/users/{userName}", UserResource.class);
 
 		// This page is going to show up if somebody access the default page of the web server.
 		Restlet mainpage = new Restlet() {
@@ -59,7 +59,7 @@ public class WebServiceApplication extends Application {
 
 				stringBuilder.append("<html>");
 				stringBuilder
-				.append("<head><title>Sample Application Default Page</title></head>");
+						.append("<head><title>Sample Application Default Page</title></head>");
 				stringBuilder.append("<body bgcolor=white>");
 				stringBuilder.append("<h1>I am an example webserver that supports RESTful web services</h1>");
 				stringBuilder.append("Click <a href=\"/widgets\">here</a> to see all my widgets.");

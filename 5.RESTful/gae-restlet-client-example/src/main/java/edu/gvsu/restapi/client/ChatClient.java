@@ -29,7 +29,7 @@ public class ChatClient
     ServerSocket serviceSkt = null;
     SvrThread svrThread;
     RegistrationInfo regInfo;
-    public static final String APPLICATION_URI = "http://localhost:8080";
+    public static final String APPLICATION_URI = "http://reflecting-poet-203512.appspot.com";
     String widgetsResourceURL = null;
     Request request = null;
     Response resp = null;
@@ -72,7 +72,7 @@ public class ChatClient
 
         // Step 3. Create the registration info bundle.
         // check if userName has been take
-        widgetsResourceURL = APPLICATION_URI + "/widgets/"+ uname;//?????
+        widgetsResourceURL = APPLICATION_URI + "/users/"+ uname;//?????
         request = new Request(Method.GET,widgetsResourceURL);
 
         // We need to ask specifically for JSON
@@ -90,13 +90,13 @@ public class ChatClient
             // Step 4. register the client with the presence service to advertise it
             // is available for chatting.
             Form form = new Form();
-            form.add("userName", uname);
+            form.add("name", uname);
             form.add("port", Integer.toString(this.serviceSkt.getLocalPort()));
 //            form.add("status", String.valueOf(true)); //set true as default
             form.add("host", myHost);
 
             // construct request to create a new widget resource
-            widgetsResourceURL = APPLICATION_URI + "/widgets";
+            widgetsResourceURL = APPLICATION_URI + "/users";
             request = new Request(Method.POST, widgetsResourceURL);
 
             // set the body of the HTTP POST command with form data.
@@ -179,7 +179,7 @@ public class ChatClient
                         }
 
                     } else if (cmd.toLowerCase().trim().startsWith("friends")) {
-                        widgetsResourceURL = APPLICATION_URI + "/widgets";
+                        widgetsResourceURL = APPLICATION_URI + "/users";
                         request = new Request(Method.GET, widgetsResourceURL);
 
                         // We need to ask specifically for JSON
@@ -200,7 +200,7 @@ public class ChatClient
                                 System.out.println("\nThe following users are logged on:\n");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jObj = jsonArray.getJSONObject(i);
-                                    String userName = jObj.getString("name");
+                                    String userName = jObj.getString("userName");
 //                                    String host = jObj.getString("host");
 //                                    int port = jObj.getInt("port");
                                     boolean status = jObj.getBoolean("status");
@@ -222,7 +222,7 @@ public class ChatClient
                         }
                         String msg = cmd.substring(pos + 1);
 
-                        widgetsResourceURL = APPLICATION_URI + "/widgets";
+                        widgetsResourceURL = APPLICATION_URI + "/users";
                         request = new Request(Method.GET, widgetsResourceURL);
 
                         // We need to ask specifically for JSON
@@ -242,7 +242,7 @@ public class ChatClient
                                 JSONArray jsonArray = new JSONArray(jsonString);
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jObj = jsonArray.getJSONObject(i);
-                                    String userName = jObj.getString("name");
+                                    String userName = jObj.getString("userName");
                                     String host = jObj.getString("host");
                                     int port = jObj.getInt("port");
                                     boolean status = jObj.getBoolean("status");
@@ -272,11 +272,11 @@ public class ChatClient
                         if (this.regInfo.getStatus()) {
                             this.regInfo.setStatus(false);
                             Form form = new Form();
-                            form.add("userName", this.regInfo.getUserName());
+                            form.add("name", this.regInfo.getUserName());
                             form.add("port", Integer.toString(this.serviceSkt.getLocalPort()));
-                            form.add("status", "0");
+                            form.add("status", String.valueOf(false));
                             form.add("host", this.regInfo.getHost());
-                            widgetsResourceURL = APPLICATION_URI + "/widgets/" + this.regInfo.getUserName();
+                            widgetsResourceURL = APPLICATION_URI + "/users/" + this.regInfo.getUserName();
                             request = new Request(Method.PUT, widgetsResourceURL);
                             request.setEntity(form.getWebRepresentation());
 
@@ -293,11 +293,11 @@ public class ChatClient
                         if (!this.regInfo.getStatus()) {
                             this.regInfo.setStatus(true);
                             Form form = new Form();
-                            form.add("userName", this.regInfo.getUserName());
+                            form.add("name", this.regInfo.getUserName());
                             form.add("port", Integer.toString(this.serviceSkt.getLocalPort()));
-                            form.add("status", "1");
+                            form.add("status", String.valueOf(true));
                             form.add("host", this.regInfo.getHost());
-                            widgetsResourceURL = APPLICATION_URI + "/widgets/" + this.regInfo.getUserName();
+                            widgetsResourceURL = APPLICATION_URI + "/users/" + this.regInfo.getUserName();
                             request = new Request(Method.PUT, widgetsResourceURL);
                             request.setEntity(form.getWebRepresentation());
 
@@ -314,7 +314,7 @@ public class ChatClient
                     } else if (cmd.toLowerCase().trim().startsWith("exit")) {
 
                         // we need to unregister from name server.
-                        widgetsResourceURL = APPLICATION_URI + "/widgets/" + this.regInfo.getUserName();
+                        widgetsResourceURL = APPLICATION_URI + "/users/" + this.regInfo.getUserName();
                         request = new Request(Method.DELETE, widgetsResourceURL);
                         // We need to ask specifically for JSON
                         request.getClientInfo().getAcceptedMediaTypes().
@@ -353,7 +353,7 @@ public class ChatClient
         boolean retval = true;
         try {
                 // look up this user's registration info so we can send message.
-                String widgetsResourceURL = APPLICATION_URI + "/widgets/" + userName;
+                String widgetsResourceURL = APPLICATION_URI + "/users/" + userName;
                 Request request = new Request(Method.GET, widgetsResourceURL);
 
                 // We need to ask specifically for JSON
@@ -372,10 +372,11 @@ public class ChatClient
                         String jsonString = responseData.getText().toString();
 //                        System.out.println("result text=" + jsonString);
                         JSONObject jObj = new JSONObject(jsonString);
-//                        String userName = jObj.getString("userName");
+                        userName = jObj.getString("userName");
                         String host = jObj.getString("host");
                         int port = jObj.getInt("port");
                         boolean status = jObj.getBoolean("status");
+                        System.out.print(msg);
                         RegistrationInfo reg = new RegistrationInfo(userName,host,port,status);
                         retval = this.sendMsgToKnownUser(reg, msg);
                     } catch (IOException e) {

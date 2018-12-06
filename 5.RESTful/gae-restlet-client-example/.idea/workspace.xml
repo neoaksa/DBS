@@ -2,32 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="075ea8e9-a485-4e10-8d34-aa1674d4efcf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../gae-restlet-example/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/ChatClient$SvrThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/ChatClient$SvrThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/ChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/ChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/RegistrationInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gvsu/restapi/client/RegistrationInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/gae-restlet-client-example-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/gae-restlet-client-example-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/OfyHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/OfyHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/RegistrationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/RegistrationInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WebServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WebServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/Widget.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetsResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetsResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/UserResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/WidgetsResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/java/edu/gvsu/restapi/UsersResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/webapp/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/src/main/webapp/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-generated/datastore-indexes-auto.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-generated/datastore-indexes-auto.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-generated/local_db.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-generated/local_db.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/OfyHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/OfyHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/appengine-web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WebServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WebServiceApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/Widget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetsResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetsResource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/WEB-INF/classes/edu/gvsu/restapi/WidgetsResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../gae-restlet-example/target/restapi-1.0-SNAPSHOT/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,13 +64,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="830" />
+          <entry key="java" value="959" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="830" />
+          <entry key="JAVA" value="959" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
@@ -82,11 +78,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5203">
-              <caret line="371" column="73" selection-start-line="371" selection-start-column="73" selection-end-line="371" selection-end-column="73" />
+            <state relative-caret-position="286">
+              <caret line="31" column="91" selection-start-line="31" selection-start-column="91" selection-end-line="31" selection-end-column="91" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
+            <state relative-caret-position="-124">
               <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
             </state>
           </provider>
@@ -125,7 +121,10 @@
       <find>request</find>
       <find>responseData</find>
       <find>5136918324969472</find>
+      <find>wi</find>
+      <find>widget</find>
       <find>userName</find>
+      <find>chat</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,8 +134,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java" />
       </list>
     </option>
   </component>
@@ -210,7 +209,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544041504338" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544075538234" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -285,7 +284,7 @@
     <frame x="0" y="0" width="1920" height="1035" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26881722" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15376344" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -294,7 +293,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32060185" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32060185" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -310,7 +309,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="7" visible="true" weight="0.3295699" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.3295699" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -341,16 +340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5203">
-          <caret line="371" column="73" selection-start-line="371" selection-start-column="73" selection-end-line="371" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SECOND">
@@ -363,8 +352,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/RegistrationInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
+        <state relative-caret-position="-124">
           <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gvsu/restapi/client/ChatClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="31" column="91" selection-start-line="31" selection-start-column="91" selection-end-line="31" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
